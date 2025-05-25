@@ -11,8 +11,12 @@ with open(file_name, 'rb') as file:
 file_size = os.path.getsize(file_name)
 
 # ask for number of bits they want to change
-changed_bits = int(input("How many of the Least Significant Bits do you want to change: "))
-
+while True:
+    changed_bits = int(input("How many of the Least Significant Bits do you want to change: "))
+    if (changed_bits > 8):
+        print("Cannot be more than 8 bits")
+    else:
+        break
 # Subtract 32 for the Int message size to be encoded as well
 # Subtract another 32 for the # of LSB to change for easy decoding
 max_message_size = int ((file_size * changed_bits - 64) / 8)
@@ -28,8 +32,17 @@ while True:
 
 message_size = len(message)
 
+changed_bits_binary = format(changed_bits, '04b')
+# encode the 4 bits into the first 2 bytes using LSB of 2
+for i in range(2):
+    bits = changed_bits_binary[i*2 : i*2+2]  # Get 2 bits for each byte
+    byte = image_bytes[i]
+    byte = (byte & ~0b11) | int(bits, 2)
+    image_bytes[i] = byte
+
+
 # message bits includes the message size at the beginning as well to be encoded
-message_bits = format(message_size, '032b') + format(changed_bits, '032b')
+message_bits = format(message_size, '032b')
 
 # add convert the message into bits and add it to the message_bits
 message_bits += ''.join(format(ord(c), '08b') for c in message)
@@ -39,7 +52,7 @@ message_bits += ''.join(format(ord(c), '08b') for c in message)
 bit_index = 0
 bit_mask = (1 << changed_bits) - 1
 # go through every byte in the image
-for i in range(len(image_bytes)):
+for i in range(2, len(image_bytes)):
     # stop going through every byte when we run out of message bits
     if bit_index >= len(message_bits):
         break
