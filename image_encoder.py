@@ -14,7 +14,8 @@ file_size = os.path.getsize(file_name)
 changed_bits = int(input("How many of the Least Significant Bits do you want to change: "))
 
 # Subtract 32 for the Int message size to be encoded as well
-max_message_size = file_size * changed_bits / 8 - 32
+# Subtract another 32 for the # of LSB to change for easy decoding
+max_message_size = int ((file_size * changed_bits - 64) / 8)
 
 while True:
     message = input("Message to encode: ")
@@ -28,10 +29,10 @@ while True:
 message_size = len(message)
 
 # message bits includes the message size at the beginning as well to be encoded
-message_bits = format(message_size, '032b')
+message_bits = format(message_size, '032b') + format(changed_bits, '032b')
 
 # add convert the message into bits and add it to the message_bits
-message_bits = ''.join(format(ord(c), '08b') for c in message)
+message_bits += ''.join(format(ord(c), '08b') for c in message)
 
 #message_bits now include the entire bitstring to begin encoding
 
@@ -49,7 +50,7 @@ for i in range(len(image_bytes)):
     #what happens when we run out of bits to embed? We need to pad the end
     # with 0s
     if len(bits_to_embed) < changed_bits:
-        bits_to_embed << (changed_bits - bits_to_embed)
+        bits_to_embed = bits_to_embed.ljust(changed_bits, '0')
     
     byte = image_bytes[i]
     # Clear LSBs and set with message bits
