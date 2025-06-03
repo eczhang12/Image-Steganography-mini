@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Steganography Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Image Steganography Demo</h1>
+            <p>Hide secret messages in images using LSB encoding</p>
+            <p>Created by Evan Zhang</p>
+        </div>
+
+        <div class="section">
+            <h2>What is Steganography?</h2>
+            <p>Steganography is the practice of hiding information within other non-secret data or physical media. Unlike cryptography, which scrambles data to make it unreadable, steganography conceals the very existence of the message.</p>
+            
+            <div class="info-box">
+                <strong>LSB (Least Significant Bit) Encoding:</strong> This technique replaces the least significant bits of image pixels with bits from your secret message. Since these bits contribute the least to the pixel's color value, the changes are virtually imperceptible to the human eye.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Try It Yourself</h2>
+            
+            <div class="upload-area" id="uploadArea">
+                <p>📁 Click here or drag and drop a PNG image</p>
+                <input type="file" id="fileInput" accept="image/png" style="display: none;">
+            </div>
+
+            <div class="controls">
+                <div class="input-group">
+                    <label for="message">Secret Message (Try copying a big text for better result):</label>
+                    <textarea id="message" rows="4" placeholder="Enter your secret message here..."></textarea>
+                </div>
+                <div class="input-group">
+                    <label for="bitsToUse">Bits to Use (1-4):</label>
+                    <select id="bitsToUse">
+                        <option value="1">1 bit (most subtle, lowest capacity)</option>
+                        <option value="2" selected>2 bits (recommended)</option>
+                        <option value="3">3 bits</option>
+                        <option value="4">4 bits (more visible)</option>
+                        <option value="5">5 bits</option>
+                        <option value="6">6 bits (even more visible)</option>
+                        <option value="7">7 bits</option>
+                        <option value="8">8 bits (overwriting completely, highest capacity)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="encode-btn" id="encodeBtn" disabled>🔒 Encode Message</button>
+
+            <div id="results" class="hidden">
+                <div class="image-comparison">
+                    <div class="image-container">
+                        <h3>Original Image</h3>
+                        <img id="originalImg" alt="Original">
+                    </div>
+                    <div class="image-container">
+                        <h3>Encoded Image</h3>
+                        <img id="encodedImg" alt="Encoded">
+                    </div>
+                    <div class="image-container">
+                        <h3>Difference (Amplified)</h3>
+                        <img id="diffImg" alt="Difference">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>How It Works</h2>
+            <p>The algorithm works by:</p>
+            <ol style="margin-left: 20px; margin-top: 10px;">
+                <li><strong>Converting the message to binary:</strong> Each character becomes a sequence of 8 bits</li>
+                <li><strong>Iterating through image pixels:</strong> Starting from the top-left, we process each pixel's RGB values</li>
+                <li><strong>Replacing LSBs:</strong> The least significant bits of each color channel are replaced with message bits</li>
+                <li><strong>Marking the end:</strong> A special delimiter indicates where the message ends</li>
+            </ol>
+            
+            <div class="info-box">
+                <strong>Security Note:</strong> While LSB steganography is simple and effective for hiding data, it's not secure against statistical analysis. For real security applications, more sophisticated techniques and encryption should be used.
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+<footer>
+    <a href="https://github.com/eczhang12/Image-Steganography-mini" target="_blank" class="github-btn">
+        <i class="fab fa-github"></i> View on GitHub
+    </a>
+    <a href="https://eczhang12.github.io/PersonalWebsitePortfolio/" target="_blank" class="personal-btn">
+        <i class="fas fa-user"></i> My Website
+    </a>
+</footer>
+</html>
