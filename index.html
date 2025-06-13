@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+    <nav class="navbar">
+        <ul class="navbar-nav">
+            <li><a href="#what-is-steganography">What is Steganography?</a></li>
+            <li><a href="#about-image-steganography">About Image Steganography</a></li>
+            <li><a href="#try-it-yourself">Try it Yourself</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="https://github.com/eczhang12/Image-Steganography-mini" target="_blank" class="github-btn"><i class="fab fa-github"></i>Github</a></li>
+        </ul>
+        
+    </nav>
     <div class="container">
         <div class="header">
             <h1>Image Steganography Demo</h1>
@@ -15,16 +25,31 @@
             <p>Created by Evan Zhang</p>
         </div>
 
-        <div class="section">
+        <div class="section" id="what-is-steganography">
             <h2>What is Steganography?</h2>
-            <p>Steganography is the practice of hiding information within other non-secret data or physical media. Unlike cryptography, which scrambles data to make it unreadable, steganography conceals the very existence of the message.</p>
-            
+            <p>Steganography, derived from the Greek Words "steganos" (meaning covered or concealed) and "graphein" (meaning writing), is the art and science of hiding information within other non-secret data or physical objects. The primary goal of steganography is to conceal the very existence of a message, making it invisible to an unsuspecting observer.</p>
+            <h3>A Brief History</h3>
+            <p>The practice of steganography dates back to ancient times. One of the earliest recorded examples come from ancient Greece, where Histiaeus, a Greek tyrant, shaved a slave's head, tattooed a message on his scalp, and then waited for his hair to grow back before sending him. Another historical example involved writing messages on wooden tablets and covering them with wax, making them appear as blank tablets.</p>
+            <h3>General Principle</h3>
+            <p>At its core, steganography leverages the redundancy or "noise" inherent in various media. By making subtle alterations to these imperceptible parts of a cover medium (like an image, audio file, or video), a secret message can be embedded without visibly or audibly changing the original file. The effectiveness relies on the human perception system's limitations.</p>
+            <h3>Types of Digital Steganography</h3>
+            <ul>
+                <li><strong>Image Steganography:</strong> Hiding data within image files by manipulating pixels</li>
+                <li><strong>Audio Steganography:</strong> Embedding messages in audio files by manipulating sound frequences, echo, or other properties.</li>
+                <li><strong>Video Steganography:</strong> A more complex form, hiding data within video frames, essentially applying image steganography to a sequence of images.</li>
+                <li><strong>Text Steganography:</strong> Concealing information within text files by manipulating formatting (spaces, tabs, font styles), using specific word choices, or even hidden characters.</li>
+            </ul>
+        </div>
+        <div class="section" id="about-image-steganography">
+            <h2>About Image Steganography</h2>
+        
             <div class="info-box">
                 <strong>LSB (Least Significant Bit) Encoding:</strong> This technique replaces the least significant bits of image pixels with bits from your secret message. Since these bits contribute the least to the pixel's color value, the changes are virtually imperceptible to the human eye.
             </div>
+
         </div>
 
-        <div class="section">
+        <div class="section" id="try-it-yourself">
             <h2>Try It Yourself</h2>
             
             <div class="upload-area" id="uploadArea">
@@ -72,7 +97,7 @@
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="how-it-works">
             <h2>How It Works</h2>
             <p>The algorithm works by:</p>
             <ol style="margin-left: 20px; margin-top: 10px;">
