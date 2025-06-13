@@ -224,6 +224,10 @@ body {
     border-radius: 0 10px 10px 0;
 }
 
+code {
+    background-color: rgb(242, 242, 242);
+}
+
 .hidden {
     display: none;
 }

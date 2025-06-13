@@ -42,9 +42,18 @@
         </div>
         <div class="section" id="about-image-steganography">
             <h2>About Image Steganography</h2>
-        
+            <p>We are just going to explore image steganography though as it is the easiest to understand.</p>
+            
+            <h3>How Digital Images Store Information</h3>
+            <p>To understand image steganography, it is essential to grasp how digital images are represented. Most digital images are composed of a grid of tiny squares called <strong>pixels</strong>. Each pixel contains color information, typically represented using the Red, Green, and Blue channel (RGB) color model. Each channel has 256 values (0 to 255), meaning that every channel must be represented by a byte (8 bits). As such, the RGB Model primarily uses 3 bytes to represent every pixel.</p>
             <div class="info-box">
-                <strong>LSB (Least Significant Bit) Encoding:</strong> This technique replaces the least significant bits of image pixels with bits from your secret message. Since these bits contribute the least to the pixel's color value, the changes are virtually imperceptible to the human eye.
+                <strong>RGBA (Red, Blue, Green, Alpha):</strong> PNGs often use the RGBA model that is based off the RGB model with an extra dimension, Alpha. The Alpha channel represents the opacity or transparency of the color and determines how much of the background or underlying elements will show through.
+            </div>
+            <h3>Least Significant Bit (LSB) Encoding in Detail</h3>
+            <p>This demo primarily uses <strong>LSB</strong> encoding, which is the simplest and most widely known technique. Imagine a pixel with a Red value of 220. In binary, 220 is <code>11011100</code>. The last bit (`0`) is the Least Significant Bit (LSB). If we change this bit, the new value becomes <code>11011101</code> which is 221. A change from 220 to 221 is almost impossible for the human eye to detect. This means that we can embed the bits of our message in these Least Significant Bits, but as you will find below, the more bits you change, the more distortion there is, eventually becoming very noticable.</p>
+
+            <div class="info-box">
+                <strong>Other types of Encoding:</strong> As mentioned earlier, LSB encoding is the simplest encoding scheme, and as such makes it <strong>very easy</strong> to decode. There are plenty of other different encoding techniques that take into account lossy compression, image noise, and other aspects.
             </div>
 
         </div>
